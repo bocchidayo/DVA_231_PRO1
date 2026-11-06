@@ -21,7 +21,11 @@ Maintain a clean root folder with only required php files and README.md
     - [x] mysql/test_data.sql - inserts test data to songs and votes db
     - [x] Tested duplicate votes manually in phpMyAdmin
 
-- [ ] includes/db.php -  settings, hardcoded mod passkey, session_start, connection
+- [x] includes/db.php -  settings, hardcoded mod passkey, session_start, connection
+    - [x] includes/.htaccess - prevents client from accessing secrets
+    - [x] Tested db connection with test.php
+    - [x] Tested db connection refusal when wrong db password
+
 - [ ] index.php - simple layout to test list.php, submit.php, vote.php and queue.js
 - [ ] list.php - return open songs with vote counts as JSON, must be sorted
 - [ ] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
