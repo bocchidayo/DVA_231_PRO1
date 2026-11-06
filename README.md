@@ -46,6 +46,11 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Tested JSON returns properly sorted and counts all votes
 
 - [ ] queue.js - poll list.php every 3s, create/update/remove rows(songs), vote form per row
+    - [x] Tested manually adding vote to song, updates and adds the vote
+    - [x] Tested adding new song using form, shows new song
+    - [x] Tested XSS and SQLi payloads in plaintext db, they don't run in queue.js
+    - [ ] Rows moving animation missing
+    - [ ] Position of rows don't change in real time as CSS is required to enforce top:
 
 - [ ] vote.php - validate song_id pkey, session id as token, insert into db +1 to vote count, redirect back
 - [ ] mod.php - hardcoded passkey form; when logged in, table with Answered/Delete per song, recycle list.php etc
