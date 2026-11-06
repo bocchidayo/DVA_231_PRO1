@@ -28,7 +28,8 @@ Maintain a clean root folder with only required php files and README.md
 
 - [ ] index.php - simple layout to test list.php, submit.php, vote.php and queue.js
     - [x] Simple form for submit.php
-    - [ ] List for songs list.php
+    - [ ] Table that shows songs
+        - [ ] Table is updated from JSON from list.php and shown by AJAX queue.js
         - [ ] Simple button for vote.php inside row
 
 - [x] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
@@ -41,9 +42,12 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Tested SQLi payloads, gets stored as plaintext in db
     - [x] Tested redirects to index.php?error=
 
-- [ ] list.php - return open songs with vote counts as JSON, must be sorted
-- [ ] vote.php - validate song_id pkey, session id as token, insert into db +1 to vote count, redirect back
+- [x] list.php - return open songs with vote counts as JSON, must be sorted
+    - [x] Tested JSON returns properly sorted and counts all votes
+
 - [ ] queue.js - poll list.php every 3s, create/update/remove rows(songs), vote form per row
+
+- [ ] vote.php - validate song_id pkey, session id as token, insert into db +1 to vote count, redirect back
 - [ ] mod.php - hardcoded passkey form; when logged in, table with Answered/Delete per song, recycle list.php etc
 - [ ] mod_action.php - check session, update song, redirect back
 - [ ] css styling - layout and styling
