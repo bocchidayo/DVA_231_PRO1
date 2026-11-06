@@ -27,8 +27,12 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Tested db connection refusal when wrong db password
 
 - [ ] index.php - simple layout to test list.php, submit.php, vote.php and queue.js
-- [ ] list.php - return open songs with vote counts as JSON, must be sorted
+    - [x] Simple form for submit.php
+    - [ ] List for songs list.php
+        - [ ] Simple button for vote.php inside row
+
 - [ ] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
+- [ ] list.php - return open songs with vote counts as JSON, must be sorted
 - [ ] vote.php - validate song_id pkey, session id as token, insert into db +1 to vote count, redirect back
 - [ ] queue.js - poll list.php every 3s, create/update/remove rows(songs), vote form per row
 - [ ] mod.php - hardcoded passkey form; when logged in, table with Answered/Delete per song, recycle list.php etc
