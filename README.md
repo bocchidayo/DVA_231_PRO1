@@ -10,7 +10,7 @@ Passkey can be hardcoded in the application.
 
 # Folder Structure
 Maintain a clean root folder with only required php files and README.md
-- includes/ - Files to include: db.php
+- includes/ - Files to include: db.php and .htaccess
 - styles/ - CSS
 - js/ - Javascript
 - mysql/ - SQL
@@ -31,7 +31,16 @@ Maintain a clean root folder with only required php files and README.md
     - [ ] List for songs list.php
         - [ ] Simple button for vote.php inside row
 
-- [ ] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
+- [x] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
+    - [x] Tested normal song sent to db no issues
+    - [x] Tested 30 second cooldown with timestamp
+    - [x] Tested whitespaces, are rejected server side
+    - [x] Tested title and artist form with more than limit, are rejected server side
+    - [x] Tested emojis, utf8 works properly
+    - [x] Tested XSS payloads, gets stored as plaintext in db
+    - [x] Tested SQLi payloads, gets stored as plaintext in db
+    - [x] Tested redirects to index.php?error=
+
 - [ ] list.php - return open songs with vote counts as JSON, must be sorted
 - [ ] vote.php - validate song_id pkey, session id as token, insert into db +1 to vote count, redirect back
 - [ ] queue.js - poll list.php every 3s, create/update/remove rows(songs), vote form per row

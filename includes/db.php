@@ -22,3 +22,9 @@ try {
     http_response_code(500);
     exit('Database not reachable');
 }
+
+// Function to redirect to a different page
+function redirect($url) {
+    header('Location: ' . $url);
+    exit;
+}
