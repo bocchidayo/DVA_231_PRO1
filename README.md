@@ -17,7 +17,10 @@ Maintain a clean root folder with only required php files and README.md
 
 
 # Task List - Ordered by Priority
-- [ ] mysql/squema.sql - create database + songs and votes tables
+- [x] mysql/schema.sql - create database + songs and votes tables
+    - [x] mysql/test_data.sql - inserts test data to songs and votes db
+    - [x] Tested duplicate votes manually in phpMyAdmin
+
 - [ ] includes/db.php -  settings, hardcoded mod passkey, session_start, connection
 - [ ] index.php - simple layout to test list.php, submit.php, vote.php and queue.js
 - [ ] list.php - return open songs with vote counts as JSON, must be sorted
@@ -26,4 +29,4 @@ Maintain a clean root folder with only required php files and README.md
 - [ ] queue.js - poll list.php every 3s, create/update/remove rows(songs), vote form per row
 - [ ] mod.php - hardcoded passkey form; when logged in, table with Answered/Delete per song, recycle list.php etc
 - [ ] mod_action.php - check session, update song, redirect back
-- [ ] css syling - layout and styling
+- [ ] css styling - layout and styling
