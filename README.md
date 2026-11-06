@@ -8,5 +8,9 @@ A passkey-protected moderator view adds a button to each item that allows markin
 Passkey can be hardcoded in the application.
 
 
-
-
+# Folder Structure
+Maintain a clean root folder with only required php files and README.md
+- includes/ - Files to include: db.php
+- styles/ - CSS
+- js/ - Javascript
+- mysql/ - SQL
