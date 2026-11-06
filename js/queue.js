@@ -96,6 +96,7 @@ function renderSongs(songs) {
     votes.textContent = voteText(song.vote_count);
 
     // Update the rank number shown in the row, allowing typereaders to read position
+    // Wont fix typereaders, need to update the HTML as well
     const rank = document.getElementById('rank-' + song.id);
     rank.textContent = '#' + (position + 1);
 

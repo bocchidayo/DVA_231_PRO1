@@ -28,9 +28,10 @@ Maintain a clean root folder with only required php files and README.md
 
 - [ ] index.php - simple layout to test list.php, submit.php, vote.php and queue.js
     - [x] Simple form for submit.php
-    - [ ] Table that shows songs
-        - [ ] Table is updated from JSON from list.php and shown by AJAX queue.js
+    - [x] Tables dont work, used div rows instead, that shows songs
+        - [x] Dive rows is updated from JSON from list.php and shown by AJAX queue.js
         - [ ] Simple button for vote.php inside row
+    - [ ] Missing index.php?error= redirects
 
 - [x] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
     - [x] Tested normal song sent to db no issues
@@ -51,6 +52,8 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Tested XSS and SQLi payloads in plaintext db, they don't run in queue.js
     - [ ] Rows moving animation missing
     - [ ] Position of rows don't change in real time as CSS is required to enforce top:
+    - [ ] Haven't tested removal of songs using mod_action.php
+    - [ ] Screenreaders have issues, HTML in queue doesn't refresh
 
 - [ ] vote.php - validate song_id pkey, session id as token, insert into db +1 to vote count, redirect back
 - [ ] mod.php - hardcoded passkey form; when logged in, table with Answered/Delete per song, recycle list.php etc
