@@ -1,5 +1,5 @@
 const queue = document.getElementById('queue');
-const row_height = 100; // row height + gap, in pixels
+const row_height = 60; // row height + gap, in pixels
 
 let isMod = false; // default is not mod (when called by index.php)
 
@@ -57,15 +57,19 @@ function createRow(song) {
 
   const rank = document.createElement('span');
   rank.id = 'rank-' + song.id;
+  rank.className = 'rank'; // Classes needed for CSS
 
   const title = document.createElement('strong');
   title.textContent = song.title;
+  // Doesnt need class, its the only strong so .song strong
 
   const artist = document.createElement('span');
   artist.textContent = song.artist;
+  artist.className = 'artist';
 
   const votes = document.createElement('span');
   votes.id = 'votes-' + song.id;
+  votes.className = 'votes';
 
   // Creating form for posting both vote and mod
   const form = document.createElement('form');
@@ -174,9 +178,6 @@ function renderSongs(songs) {
     const rank = document.getElementById('rank-' + song.id);
     rank.textContent = '#' + (position + 1);
 
-    //Remove rows not used anymore, before adding top position pixel height
-    removeOldRows(songs);
-
     // Updates the position of the row in the queue
     // Multiplies the position it has by row height
     // This way it moves up or down using pixels
@@ -184,6 +185,14 @@ function renderSongs(songs) {
 
     position = position + 1;
   }
+
+    // Remove rows not used anymore when answered or deleted
+    // Runs out the loop so it still runs when the list is empty
+    removeOldRows(songs);
+
+    // Absolute rows took no space, so the queue has its full height
+    queue.style.height = (songs.length * row_height) + 'px';
+
 }
 
 

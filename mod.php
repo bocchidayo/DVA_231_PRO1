@@ -39,74 +39,73 @@ if (isset($_SESSION['is_mod'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="js/queue.js" defer></script>
     <title>Moderator View</title>
 </head>
 <body>
+    <main>
 
-<?php if (!isset($_SESSION['is_mod'])): ?>
+        <?php if (!isset($_SESSION['is_mod'])): ?>
 
-    <h1>Moderator access</h1>
+            <h1>Moderator access</h1>
 
-    <?php if ($loginError !== ''): ?>
-        <p><?php echo $loginError; ?></p>
-    <?php endif; ?>
+            <?php if ($loginError !== ''): ?>
+                <p><?php echo $loginError; ?></p>
+            <?php endif; ?>
 
-    <form method="post" action="mod.php">
-        <label for="passkey">Passkey</label>
-        <input type="password" id="passkey" name="passkey" required>
-        <button type="submit">Enter</button>
-    </form>
+            <form method="post" action="mod.php">
+                <label for="passkey">Passkey</label>
+                <input type="password" id="passkey" name="passkey" required>
+                <button type="submit">Enter</button>
+            </form>
 
-<?php else: ?>
+        <?php else: ?>
 
-    <h1>Manage queue</h1>
-    
-    <a href="mod.php?logout=1">Log out</a>
-    
-    <p> Manage song queue here</p>
+            <h1>Manage queue</h1>
+            
+            <a href="mod.php?logout=1">Log out</a>
+            
+            <h2>Queue</h2>
+            <!-- The song table goes here -->
+            <div id="queue" data-mod="yes"></div>
 
-    <!-- The song table goes here -->
+            <h2>History</h2>
 
-    <div id="queue" data-mod="yes"></div>
-    <script src="js/queue.js" defer></script>
+            <?php if (count($history) === 0): ?>
+                <p>No answered or deleted songs yet.</p>
+            
+            <?php else: ?>
+                <!-- The history table  -->
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Status</th>
+                        <th>Requested</th>
+                        <th></th>
+                    </tr>
 
+                    <?php foreach ($history as $song): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($song['title']); ?></td>
+                            <td><?php echo htmlspecialchars($song['artist']); ?></td>
+                            <td><?php echo $song['status']; ?></td>
+                            <td><?php echo $song['created_at']; ?></td>
+                            <td>
+                                <form method="post" action="mod_action.php">
+                                    <input type="hidden" name="song_id" value="<?php echo $song['id']; ?>">
+                                    <button type="submit" name="action" value="restore">Restore</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
 
-    <h2>History</h2>
+            <?php endif; ?>
 
-    <?php if (count($history) === 0): ?>
-        <p>No answered or deleted songs yet.</p>
-    
-    <?php else: ?>
-
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Status</th>
-                <th>Requested</th>
-                <th></th>
-            </tr>
-
-            <?php foreach ($history as $song): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($song['title']); ?></td>
-                    <td><?php echo htmlspecialchars($song['artist']); ?></td>
-                    <td><?php echo $song['status']; ?></td>
-                    <td><?php echo $song['created_at']; ?></td>
-                    <td>
-                        <form method="post" action="mod_action.php">
-                            <input type="hidden" name="song_id" value="<?php echo $song['id']; ?>">
-                            <button type="submit" name="action" value="restore">Restore</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-
-    <?php endif; ?>
-
-<?php endif; ?>
-
+        <?php endif; ?>
+    </main>
 
 </body>
 </html>
