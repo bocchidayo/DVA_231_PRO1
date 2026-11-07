@@ -43,7 +43,3 @@ $stmt->execute([$title, $artist]);
 $_SESSION['last_submit'] = time();
 
 redirect('index.php');
-
-
-
-

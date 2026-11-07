@@ -61,7 +61,22 @@ function createRow(song) {
   const votes = document.createElement('span');
   votes.id = 'votes-' + song.id;
 
-  row.append(rank, ' ', title, ' ', artist, ' ', votes);
+  // Creating vote button, POSTS to vote.php with song id
+  const form = document.createElement('form');
+  form.method = 'post';
+  form.action = 'vote.php';
+
+  const songId = document.createElement('input');
+  songId.type = 'hidden';
+  songId.name = 'song_id';
+  songId.value = song.id;
+
+  const button = document.createElement('button');
+  button.type = 'submit';
+  button.textContent = 'Vote';
+
+  form.append(songId, button);
+  row.append(rank, ' ', title, ' ', artist, ' ', votes, ' ', form);
   return row;
 }
 
