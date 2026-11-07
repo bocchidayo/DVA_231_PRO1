@@ -1,6 +1,12 @@
 const queue = document.getElementById('queue');
 const row_height = 100; // row height + gap, in pixels
 
+let isMod = false; // default is not mod (when called by index.php)
+
+const modLabel = queue.getAttribute('data-mod'); // mod label is true in mod.php
+if (modLabel === 'yes') {
+  isMod = true;
+}
 
 // Sample JSON from list.php
 // {"id":1,"title":"Test Song A","artist":"Artist A","vote_count":2}
@@ -42,7 +48,7 @@ function renderSongs(songs) {
 */
 
 
-// Creates a single row for a song instead of looping
+// Creates a single row for a song instead of looping through all songs
 function createRow(song) {
 
   const row = document.createElement('div');
@@ -61,21 +67,53 @@ function createRow(song) {
   const votes = document.createElement('span');
   votes.id = 'votes-' + song.id;
 
-  // Creating vote button, POSTS to vote.php with song id
+  // Creating form for posting both vote and mod
   const form = document.createElement('form');
   form.method = 'post';
-  form.action = 'vote.php';
 
   const songId = document.createElement('input');
   songId.type = 'hidden';
   songId.name = 'song_id';
   songId.value = song.id;
+  form.append(songId);
 
-  const button = document.createElement('button');
-  button.type = 'submit';
-  button.textContent = 'Vote';
+  // Mod view buttons
+  if (isMod) {
+    form.action = "mod_action.php";
+    
+    const answeredButton = document.createElement('button');
+    answeredButton.type = 'submit';
+    answeredButton.name = 'action';
+    answeredButton.value = 'answered';
+    answeredButton.textContent = 'Answered';
 
-  form.append(songId, button);
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'submit';
+    deleteButton.name = 'action';
+    deleteButton.value = 'delete';
+    deleteButton.textContent = 'Delete';
+
+    // Ask before deleting, in case the list moved under the cursor
+    deleteButton.addEventListener('click', function (event) {
+      if (!confirm('Delete "' + song.title + '"?')) {
+        event.preventDefault();
+      }
+    });
+
+    form.append(answeredButton, deleteButton);
+  
+  } else {
+    // Index.php buttons
+    // Vote button, sent to vote.php
+    form.action = 'vote.php';
+
+    const voteButton = document.createElement('button');
+    voteButton.type = 'submit';
+    voteButton.textContent = 'Vote';
+
+    form.append(voteButton);
+  }
+
   row.append(rank, ' ', title, ' ', artist, ' ', votes, ' ', form);
   return row;
 }
@@ -91,7 +129,7 @@ function voteText(count) {
   }
 }
 
-// Renders list of songs by looping
+// Renders list of songs by looping all songs
 // Create all song rows with createRow
 // Update the vote count and move the row
 function renderSongs(songs) {
