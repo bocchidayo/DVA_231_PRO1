@@ -20,6 +20,17 @@ if (isset($_GET['logout'])) {
     redirect('index.php');
 }
 
+// Table with Answered and deleted songs, newest first
+$history = [];
+if (isset($_SESSION['is_mod'])) {
+    $history = $conn->query(
+        "SELECT id, title, artist, status, created_at
+         FROM songs
+         WHERE status != 'open'
+         ORDER BY id DESC"
+    )->fetchAll();
+}
+
 ?>
 
 
@@ -59,7 +70,40 @@ if (isset($_GET['logout'])) {
     <div id="queue" data-mod="yes"></div>
     <script src="js/queue.js" defer></script>
 
-     
+
+    <h2>History</h2>
+
+    <?php if (count($history) === 0): ?>
+        <p>No answered or deleted songs yet.</p>
+    
+    <?php else: ?>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Status</th>
+                <th>Requested</th>
+                <th></th>
+            </tr>
+
+            <?php foreach ($history as $song): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($song['title']); ?></td>
+                    <td><?php echo htmlspecialchars($song['artist']); ?></td>
+                    <td><?php echo $song['status']; ?></td>
+                    <td><?php echo $song['created_at']; ?></td>
+                    <td>
+                        <form method="post" action="mod_action.php">
+                            <input type="hidden" name="song_id" value="<?php echo $song['id']; ?>">
+                            <button type="submit" name="action" value="restore">Restore</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+    <?php endif; ?>
 
 <?php endif; ?>
 

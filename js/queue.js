@@ -129,6 +129,27 @@ function voteText(count) {
   }
 }
 
+// Removes rows of songs that are no longer in the list which are answered or deleted
+function removeOldRows(songs) {
+  const rows = Array.from(queue.children);
+
+  for (const row of rows) {
+    let found = false;
+
+    // Loop songs row, check if they exist
+    for (const song of songs) {
+      if (row.id === 'song-' + song.id) {
+        found = true;
+      }
+    }
+
+    // Not in the list anymore = remove the row entirely using polling in real time
+    if (found === false) {
+      row.remove();
+    }
+  }
+}
+
 // Renders list of songs by looping all songs
 // Create all song rows with createRow
 // Update the vote count and move the row
@@ -152,6 +173,9 @@ function renderSongs(songs) {
     // Wont fix typereaders, need to update the HTML as well
     const rank = document.getElementById('rank-' + song.id);
     rank.textContent = '#' + (position + 1);
+
+    //Remove rows not used anymore, before adding top position pixel height
+    removeOldRows(songs);
 
     // Updates the position of the row in the queue
     // Multiplies the position it has by row height
