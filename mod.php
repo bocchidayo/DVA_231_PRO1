@@ -31,6 +31,17 @@ if (isset($_SESSION['is_mod'])) {
     )->fetchAll();
 }
 
+// Shows only the 5 newest history entries
+$historyTotal = count($history);
+$showAllHistory = isset($_GET['history']);
+
+if ($showAllHistory) {
+    $visibleHistory = $history;
+} else {
+    $visibleHistory = array_slice($history, 0, 5);
+}
+
+
 ?>
 
 
@@ -77,30 +88,40 @@ if (isset($_SESSION['is_mod'])) {
             
             <?php else: ?>
                 <!-- The history table  -->
-                <table>
-                    <tr>
-                        <th>Title</th>
-                        <th>Artist</th>
-                        <th>Status</th>
-                        <th>Requested</th>
-                        <th></th>
-                    </tr>
-
-                    <?php foreach ($history as $song): ?>
+                <div class="table-scroll"> <!-- Div to make table vertical scrollable -->
+                    <table>
                         <tr>
-                            <td><?php echo htmlspecialchars($song['title']); ?></td>
-                            <td><?php echo htmlspecialchars($song['artist']); ?></td>
-                            <td><?php echo $song['status']; ?></td>
-                            <td><?php echo $song['created_at']; ?></td>
-                            <td>
-                                <form method="post" action="mod_action.php">
-                                    <input type="hidden" name="song_id" value="<?php echo $song['id']; ?>">
-                                    <button type="submit" name="action" value="restore">Restore</button>
-                                </form>
-                            </td>
+                            <th class="col-title">Title</th>
+                            <th class="col-artist">Artist</th>
+                            <th class="col-status">Status</th>
+                            <th class="col-time">Requested</th>
+                            <th class="col-action">Action</th>
                         </tr>
-                    <?php endforeach; ?>
-                </table>
+
+                        <?php foreach ($visibleHistory as $song): ?>
+                            <tr>
+                                <td class="cell-title"><?php echo htmlspecialchars($song['title']); ?></td>
+                                <td class="cell-title"><?php echo htmlspecialchars($song['artist']); ?></td>
+                                <td><?php echo $song['status']; ?></td>
+                                <td><?php echo $song['created_at']; ?></td>
+                                <td>
+                                    <form method="post" action="mod_action.php">
+                                        <input type="hidden" name="song_id" value="<?php echo $song['id']; ?>">
+                                        <button type="submit" name="action" value="restore">Restore</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+
+                <?php if ($historyTotal > 5): ?>
+                    <?php if ($showAllHistory): ?>
+                        <a href="mod.php#history">Show less</a>
+                    <?php else: ?>
+                        <a href="mod.php?history=all#history">Show all (<?php echo $historyTotal; ?>)</a>
+                    <?php endif; ?>
+                <?php endif; ?>
 
             <?php endif; ?>
 

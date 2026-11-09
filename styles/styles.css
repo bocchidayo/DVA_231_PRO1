@@ -141,3 +141,79 @@ button {
   cursor: pointer;
 }
 
+
+
+/* Table design for mod view */
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #d4d4d4;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+th {
+  font-size: 0.875rem;
+  color: #5c5c5c;
+}
+
+.col-artist { width: 20%; }
+.col-votes  { width: 60px; }
+.col-status { width: 90px; }
+.col-time   { width: 60px; }
+.col-action { width: 96px; }
+
+.cell-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+main.wide {
+  max-width: 960px;
+}
+
+
+
+/* Phones (screens up to 600px wide) */
+@media (max-width: 600px) {
+  .song {
+    gap: 8px;
+    padding: 0 6px 0 10px;
+  }
+
+  .song .rank {
+    width: 2em;
+  }
+
+  /* Hide the artist in the queue, so the title gets the space */
+  /* Div row is too big to fit on phone, and no vertical scroll can fix it */
+  .song .artist {
+    display: none;
+  }
+
+  .song .votes,
+  .song button {
+    font-size: 0.8rem;
+  }
+
+  .song button {
+    padding: 0 10px;
+  }
+}
+
+/* Vertical scroll for history table mod view */
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  min-width: 560px;
+}

@@ -89,7 +89,7 @@ function createRow(song) {
     answeredButton.type = 'submit';
     answeredButton.name = 'action';
     answeredButton.value = 'answered';
-    answeredButton.textContent = 'Answered';
+    answeredButton.textContent = 'Answer';
 
     const deleteButton = document.createElement('button');
     deleteButton.type = 'submit';

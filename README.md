@@ -81,26 +81,29 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Answer and Delete work as intended, warning when deleting
     - [x] History added to see previous answered and deleted songs
     - [x] History baked into the HTML generated over SQL fetch table
-    - [ ] See More button in history to expand when more than 10 songs.
-    - [ ] Sort and Filter by in the history would be helpful, look this up
+    - [x] See More button in history to expand when more than 5 songs.
+    - [ ] Sort and Filter by in the history would be helpful, look this up probably not needed
 
-- [ ] style/style.css - layout and styling
+- [x] style/style.css - layout and styling
     - [x] Queue animation when ranking changes
         - [x] Adding this broke the history table in mod.php - fixed previously
     - [x] Page layout; font, centred column, padding
     - [x] Form buttons instead of default html ones
     - [x] Div rows; need border, padding and overflow for long titles
-        - [ ] TODO: Fix the history view table 
+        - [x] TODO: Fix the history view table - css added + class tags
         ![alt text](image.png)
-    - [ ] Adding phone support viewports
-        - [ ] Phone bottom view looks constrained, change this
+    - [x] Adding phone support viewports
+        - [x] Phone bottom view looks constrained, change this
+        - [x] Added Show All button for mod history view
+        - [x] Added vertical scroll to mod history view
 
 # Final Tasks
 - [ ] Reorder php files into designated folders
 - [ ] Sending song request and voting, hard refreshes the page, look up fix
 - [ ] Harden mod password login
-- [ ] Logout link in mod site looks ugly
+- [ ] Logout link in mod site looks ugly and also show all button
 - [ ] Change logout GET to POST
 - [ ] Remember to add error messages in index.php, ?error= 
 - [ ] Clean up code and test files, test.php and test_data.sql
-- [ ] Show which songs you've voted for
+- [ ] Show which songs you've voted for - grey out button
+- [ ] Add button to clear all queued songs (finishing an event button)
