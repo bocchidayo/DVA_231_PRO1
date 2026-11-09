@@ -75,14 +75,14 @@ Maintain a clean root folder with only required php files and README.md
         - [x] Even with mod view they shouldn't be able to trigger any action from mod_action.php safeguards
     - [x] 2 tables, one dynamically polls with AJAX, one refreshes with the page for history
 
-- [ ] mod_action.php - check session, update song, redirect back to mod.php
+- [x] mod_action.php - check session, update song, redirect back to mod.php
     - [x] Tested, users without mod can't trigger the action, gets 403 forbidden
     - [x] Tested, SQLi and XSS payloads in db, don't trigger on answer/delete and restore button
     - [x] Answer and Delete work as intended, warning when deleting
     - [x] History added to see previous answered and deleted songs
     - [x] History baked into the HTML generated over SQL fetch table
     - [x] See More button in history to expand when more than 5 songs.
-    - [ ] Sort and Filter by in the history would be helpful, look this up probably not needed
+    - [x] Sort and Filter by in the history would be helpful, look this up - probably not needed
 
 - [x] style/style.css - layout and styling
     - [x] Queue animation when ranking changes
@@ -106,4 +106,4 @@ Maintain a clean root folder with only required php files and README.md
 - [ ] Remember to add error messages in index.php, ?error= 
 - [ ] Clean up code and test files, test.php and test_data.sql
 - [ ] Show which songs you've voted for - grey out button
-- [ ] Add button to clear all queued songs (finishing an event button)
+- [x] Add button to clear all queued songs (finishing an event button)

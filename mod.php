@@ -14,12 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loginError = 'Wrong passkey';
 }
 
-// Log out, forgets the moderator flag
-if (isset($_GET['logout'])) {
-    unset($_SESSION['is_mod']);
-    redirect('index.php');
-}
-
 // Table with Answered and deleted songs, newest first
 $history = [];
 if (isset($_SESSION['is_mod'])) {
@@ -41,6 +35,12 @@ if ($showAllHistory) {
     $visibleHistory = array_slice($history, 0, 5);
 }
 
+// Log out button to forget the moderator flag; POST only
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    unset($_SESSION['is_mod']);
+    redirect('index.php');
+}
+
 
 ?>
 
@@ -51,7 +51,6 @@ if ($showAllHistory) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="js/queue.js" defer></script>
     <title>Moderator View</title>
 </head>
 <body>
@@ -72,23 +71,28 @@ if ($showAllHistory) {
             </form>
 
         <?php else: ?>
+            <!-- Defer js inside php else -->
+            <script src="js/queue.js" defer></script>
 
             <h1>Manage queue</h1>
             
-            <a href="mod.php?logout=1">Log out</a>
-            
+            <!-- Logout button as post instead of get -->
+                <form method="post" action="mod.php">
+                    <button type="submit" name="logout" value="1">Log out</button>
+                </form>
+
             <h2>Queue</h2>
             <!-- The song table goes here -->
             <div id="queue" data-mod="yes"></div>
 
-            <h2>History</h2>
+            <h2 id="history">History</h2>
 
             <?php if (count($history) === 0): ?>
                 <p>No answered or deleted songs yet.</p>
             
             <?php else: ?>
                 <!-- The history table  -->
-                <div class="table-scroll"> <!-- Div to make table vertical scrollable -->
+                <div class="table-scroll"> <!-- Div to make table horizontal lol scrollable -->
                     <table>
                         <tr>
                             <th class="col-title">Title</th>
@@ -124,6 +128,14 @@ if ($showAllHistory) {
                 <?php endif; ?>
 
             <?php endif; ?>
+
+            <h2>End of event</h2>
+            <p>Clears entire queue for next event</p>
+
+            <form method="post" action="clear_queue.php"
+                onsubmit="return confirm('Clear ALL queued songs?');">
+                <button type="submit">Clear queue</button>
+            </form>
 
         <?php endif; ?>
     </main>
