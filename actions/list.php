@@ -1,5 +1,5 @@
 <?php
-require 'includes/db.php';
+require '../includes/db.php';
 
 // Header set to json only
 header('Content-Type: application/json');

@@ -1,5 +1,5 @@
 <?php
-require 'includes/db.php';
+require '../includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -16,4 +16,4 @@ if (!isset($_SESSION['is_mod'])) {
 // Move every song still in the queue to deleted status in
 $conn->query("UPDATE songs SET status = 'deleted' WHERE status = 'open'");
 
-redirect('mod.php');
+redirect('../mod.php');

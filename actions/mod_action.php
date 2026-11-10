@@ -1,5 +1,5 @@
 <?php
-require 'includes/db.php';
+require '../includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -17,7 +17,7 @@ if (!isset($_SESSION['is_mod'])) {
 // Prevents SQLi using Burpsuite/Caido
 $songId = $_POST['song_id'] ?? '';
 if (!ctype_digit($songId)) {
-    redirect('index.php?error=invalid');
+    redirect('../index.php?error=invalid');
 }
 
 // Only allow known actions, and decide the new status hardcoded
@@ -30,7 +30,7 @@ if ($action === 'answered') {
 } elseif ($action === 'restore') {
     $newStatus = 'open';
 } else {
-    redirect('mod.php');
+    redirect('../mod.php');
 }
 
 // Change the song status 
@@ -39,4 +39,4 @@ $stmt = $conn->prepare('UPDATE songs SET status = ? WHERE id = ?');
 $stmt->execute([$newStatus, $songId]);
 
 
-redirect('mod.php');
+redirect('../mod.php');

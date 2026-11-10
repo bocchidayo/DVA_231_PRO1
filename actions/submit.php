@@ -1,5 +1,5 @@
 <?php
-require 'includes/db.php';
+require '../includes/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // User needs to wait 30 seconds before submit or else spam
 if (isset($_SESSION['last_submit']) && time() - $_SESSION['last_submit'] < 30) {
-    redirect('index.php?error=wait');
+    redirect('../index.php?error=wait');
 }
 
 
@@ -21,17 +21,17 @@ $artist = trim($_POST['artist'] ?? '');
 
 // Title is required
 if ($title === '') {
-    redirect('index.php?error=title_empty');
+    redirect('../index.php?error=title_empty');
 }
 
 // Title max 80 characters as defined by db in schema
 if (mb_strlen($title) > 80) {
-    redirect('index.php?error=title_long');
+    redirect('../index.php?error=title_long');
 }
 
 // Artist max 60 characters as defined by db in schema
 if (mb_strlen($artist) > 60) {
-    redirect('index.php?error=artist_long');
+    redirect('../index.php?error=artist_long');
 }
 
 
@@ -42,4 +42,4 @@ $stmt->execute([$title, $artist]);
 // Start the cooldown only after a successful save
 $_SESSION['last_submit'] = time();
 
-redirect('index.php');
+redirect('../index.php');

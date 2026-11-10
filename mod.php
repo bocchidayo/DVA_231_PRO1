@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                                 <td><?php echo $song['status']; ?></td>
                                 <td><?php echo $song['created_at']; ?></td>
                                 <td>
-                                    <form method="post" action="mod_action.php">
+                                    <form method="post" action="actions/mod_action.php">
                                         <input type="hidden" name="song_id" value="<?php echo $song['id']; ?>">
                                         <button type="submit" name="action" value="restore">Restore</button>
                                     </form>
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
             <h2>End of event</h2>
             <p>Clears entire queue for next event</p>
 
-            <form method="post" action="clear_queue.php"
+            <form method="post" action="actions/clear_queue.php"
                 onsubmit="return confirm('Clear ALL queued songs?');">
                 <button type="submit">Clear queue</button>
             </form>
