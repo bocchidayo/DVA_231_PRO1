@@ -101,9 +101,9 @@ Maintain a clean root folder with only required php files and README.md
 - [ ] Reorder php files into designated folders
 - [ ] Sending song request and voting, hard refreshes the page, look up fix
 - [ ] Harden mod password login
-- [ ] Logout link in mod site looks ugly and also show all button
-- [ ] Change logout GET to POST
-- [ ] Remember to add error messages in index.php, ?error= 
-- [ ] Clean up code and test files, test.php and test_data.sql
+- [x] Logout link in mod site looks ugly and also show all button
+- [x] Change logout GET to POST
+- [x] Remember to add error messages in index.php, ?error= 
+- [x] Clean up code and test files, test.php and test_data.sql
 - [ ] Show which songs you've voted for - grey out button
 - [x] Add button to clear all queued songs (finishing an event button)

@@ -16,38 +16,6 @@ if (modLabel === 'yes') {
 // artist
 // vote_count
 
-
-// Function to render list of songs into rows in the queue div
-/* Not used anymore
-function renderSongs(songs) {
-  queue.textContent = '';
-
-  for (const song of songs) {
-    const row = document.createElement('div');
-    row.className = 'song';
-
-    const title = document.createElement('strong');
-    title.textContent = song.title;
-
-    const artist = document.createElement('span');
-    artist.textContent = song.artist;
-
-    const votes = document.createElement('span');
-    if (song.vote_count === 0) {
-      votes.textContent = 'No votes';
-    } else if (song.vote_count === 1) {
-      votes.textContent = '1 vote';
-    } else {
-      votes.textContent = song.vote_count + ' votes';
-    }
-
-    row.append(title, ' ', artist, ' ', votes);
-    queue.appendChild(row);
-  }
-}
-*/
-
-
 // Creates a single row for a song instead of looping through all songs
 function createRow(song) {
 

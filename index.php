@@ -1,5 +1,27 @@
 <?php
 require 'includes/db.php';
+
+// Pick a message for the ?error= code in the URL (unknown codes show nothing)
+$error = $_GET['error'] ?? '';
+$errorMessage = '';
+
+if ($error === 'wait') {
+    $errorMessage = 'Please wait 30 seconds before requesting another song.';
+} elseif ($error === 'title_empty') {
+    $errorMessage = 'Please enter a song title.';
+} elseif ($error === 'title_long') {
+    $errorMessage = 'The song title can be at most 80 characters.';
+} elseif ($error === 'artist_long') {
+    $errorMessage = 'The artist name can be at most 60 characters.';
+} elseif ($error === 'invalid') {
+    $errorMessage = 'That song is no longer in the queue.';
+} elseif ($error === 'already_voted') {
+    $errorMessage = 'You already voted for this song.';
+} elseif ($error === 'server') {
+    $errorMessage = 'Something went wrong. Please try again.';
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +35,11 @@ require 'includes/db.php';
 </head>
 <body>
     <main>
+
+        <!-- Error message php if at the top -->
+        <?php if ($errorMessage !== ''): ?>
+            <p class="error" role="alert"><?php echo $errorMessage; ?></p>
+        <?php endif; ?>
 
         <h1>Song Requests</h1>
     
