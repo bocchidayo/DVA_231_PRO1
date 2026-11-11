@@ -21,4 +21,24 @@ $sql = "SELECT songs.id, songs.title, songs.artist, COUNT(votes.id) AS vote_coun
 // Fetch all songs and return as JSON
 $songs = $conn->query($sql)->fetchAll();
 
+// Check which songs this session token already voted for
+$stmt = $conn->prepare('SELECT song_id FROM votes WHERE voter_token = ?');
+$stmt->execute([session_id()]);
+
+
+$votedIds = [];
+foreach ($stmt->fetchAll() as $row) {
+    $votedIds[] = $row['song_id'];
+}
+
+// Add if session voted for each song, add voted, if not = false
+foreach ($songs as $index => $song) {
+    if (in_array($song['id'], $votedIds)) {
+        $songs[$index]['voted'] = true;
+    } else {
+        $songs[$index]['voted'] = false;
+    }
+}
+
+
 echo json_encode($songs);

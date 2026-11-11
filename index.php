@@ -44,7 +44,7 @@ if ($error === 'wait') {
         <h1>Song Requests</h1>
     
         <!-- Show form to submit song -->
-        <form id="request-form" method="post" action="submit.php">
+        <form id="request-form" method="post" action="actions/submit.php">
             <label for="title">Song title</label>
             <input type="text" id="title" name="title" maxlength="80" required>
 
@@ -53,6 +53,9 @@ if ($error === 'wait') {
 
             <button type="submit">Request</button>
         </form>
+
+        <!-- Success message after submit and vote -->
+        <p id="status-message" role="status"></p>
 
         <h2>Queue</h2>
         <!-- Show queue of songs with AJAX -->

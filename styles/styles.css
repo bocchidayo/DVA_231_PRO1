@@ -75,6 +75,11 @@ button {
   cursor: pointer;
 }
 
+/* If button is disabled or already voted, greyed out and not clickable */
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 
 /*  Queue rows */
 .song {
@@ -227,4 +232,11 @@ table {
   border: 1px solid #b3261e;
   border-radius: 8px;
   color: #8c1d18;
+}
+
+
+/* Status message styling*/
+#status-message {
+  color: #145a26;
+  font-weight: 600;
 }

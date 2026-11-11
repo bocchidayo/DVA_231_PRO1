@@ -98,11 +98,13 @@ Maintain a clean root folder with only required php files and README.md
 
 # Final Tasks
 - [x] Reorder php files into designated folders
-- [ ] Sending song request and voting, hard refreshes the page, look up fix
+- [x] Sending song request and voting, hard refreshes the page, look up fix
+    - [x] Forgot to rename list to actions/list.php, breaking queue
 - [x] Harden mod password login only added sleep
 - [x] Logout link in mod site looks ugly and also show all button
 - [x] Change logout GET to POST
 - [x] Remember to add error messages in index.php, ?error= 
 - [x] Clean up code and test files, test.php and test_data.sql
-- [ ] Show which songs you've voted for - grey out button
+- [x] Show which songs you've voted for - grey out button
+- [x] Add messages when if success = voting and submitting using js
 - [x] Add button to clear all queued songs (finishing an event button)
