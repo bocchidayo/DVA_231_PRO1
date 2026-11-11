@@ -32,7 +32,7 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Tables dont work, used div rows instead, that shows songs
         - [x] Dive rows is updated from JSON from list.php and shown by AJAX queue.js
         - [x] Simple button for vote.php inside div rows
-    - [ ] Missing index.php?error= redirects
+    - [x] Missing index.php?error= redirects - done
 
 - [x] submit.php - validate title/artist, insert title/artist into db as song_id pkey, redirect back
     - [x] Tested normal song sent to db no issues
@@ -91,16 +91,15 @@ Maintain a clean root folder with only required php files and README.md
     - [x] Form buttons instead of default html ones
     - [x] Div rows; need border, padding and overflow for long titles
         - [x] TODO: Fix the history view table - css added + class tags
-        ![alt text](image.png)
     - [x] Adding phone support viewports
         - [x] Phone bottom view looks constrained, change this
         - [x] Added Show All button for mod history view
         - [x] Added vertical scroll to mod history view
 
 # Final Tasks
-- [ ] Reorder php files into designated folders
+- [x] Reorder php files into designated folders
 - [ ] Sending song request and voting, hard refreshes the page, look up fix
-- [ ] Harden mod password login
+- [x] Harden mod password login only added sleep
 - [x] Logout link in mod site looks ugly and also show all button
 - [x] Change logout GET to POST
 - [x] Remember to add error messages in index.php, ?error= 

@@ -2,15 +2,22 @@
 require 'includes/db.php';
 $loginError = '';
 
-// Log in compare the posted passkey with the one in db.php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $passkey = $_POST['passkey'] ?? '';
 
-    if ($passkey === MOD_PASSKEY) {
+// Log out button to forget the moderator flag; POST only
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    unset($_SESSION['is_mod']);
+    redirect('index.php');
+}
+
+
+// Log in compare the posted passkey with the one in db.php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['passkey'])) {
+    if ($_POST['passkey'] === MOD_PASSKEY) {
         session_regenerate_id(true);
         $_SESSION['is_mod'] = true;
         redirect('mod.php');
     }
+    sleep(1); // Hardening guessing password form
     $loginError = 'Wrong passkey';
 }
 
@@ -35,11 +42,6 @@ if ($showAllHistory) {
     $visibleHistory = array_slice($history, 0, 5);
 }
 
-// Log out button to forget the moderator flag; POST only
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-    unset($_SESSION['is_mod']);
-    redirect('index.php');
-}
 
 
 ?>
